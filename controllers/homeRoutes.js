@@ -40,6 +40,7 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+// View dashboard with access to the user's posts and comments.
 router.get('/dashboard', withAuth, async (req, res) => {
     try {
         const userData = await User.findByPk(req.session.user_id, {
@@ -57,6 +58,30 @@ router.get('/dashboard', withAuth, async (req, res) => {
     catch (err) {
         res.status(500).json(err);
     }
+});
+
+// View specific post
+router.get('/post/:id', withAuth, async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id, {
+            include: [{ model: Comment} ]
+        });
+
+        const post = postData.get({plain: true});
+
+        res.render('post', {
+            post,
+            logged_in: req.session.logged_in
+        });
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Render page to create a new post
+router.get('/newpost', withAuth, async (req, res) => {
+    res.render('newpost');
 })
 
 
