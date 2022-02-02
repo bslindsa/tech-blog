@@ -8,10 +8,10 @@ router.get('/', async (req, res) => {
             include: [{model: User}]
         });
 
-        const posts = postData.map((post) => battle.get({plain: true}));
+        const posts = postData.map((post) => post.get({plain: true}));
         
         res.render('homepage', {
-            posts,
+            ...posts,
             logged_in: req.session.logged_in
         });
     }
@@ -40,12 +40,23 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-router.get('/dashboard', withAuth, (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
+    try {
+        const userData = await User.findByPk(req.session.user_id, {
+            attributes: { exclude: ['password'] },
+            include: [{model: Post}, {model: Comment}]
+        });
 
-
-    res.render('dashboard'), {
-        logged_in: true
-    };
+        const user = userData.get({plain: true});
+        
+        res.render('dashboard', {
+            user,
+            logged_in: req.session.logged_in
+        });
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
 })
 
 
