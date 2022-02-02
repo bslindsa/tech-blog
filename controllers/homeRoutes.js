@@ -5,13 +5,13 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
-            include: [{model: User}]
+            include: [{ model: User }]
         });
 
-        const posts = postData.map((post) => post.get({plain: true}));
-        
+        const posts = postData.map((post) => post.get({ plain: true }));
+
         res.render('homepage', {
-            ...posts,
+            posts,
             logged_in: req.session.logged_in
         });
     }
@@ -45,15 +45,19 @@ router.get('/dashboard', withAuth, async (req, res) => {
     try {
         const userData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['password'] },
-            include: [{model: Post}, {model: Comment}]
+            include: [{
+                model: Post,
+                include: { model: Comment }
+            }]
         });
 
-        const user = userData.get({plain: true});
-        
+        const user = userData.get({ plain: true });
+
         res.render('dashboard', {
             user,
             logged_in: req.session.logged_in
         });
+        // res.json(user);
     }
     catch (err) {
         res.status(500).json(err);
@@ -64,10 +68,10 @@ router.get('/dashboard', withAuth, async (req, res) => {
 router.get('/post/:id', withAuth, async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
-            include: [{ model: Comment} ]
+            include: [{ model: Comment }]
         });
 
-        const post = postData.get({plain: true});
+        const post = postData.get({ plain: true });
 
         res.render('post', {
             post,
@@ -81,7 +85,9 @@ router.get('/post/:id', withAuth, async (req, res) => {
 
 // Render page to create a new post
 router.get('/newpost', withAuth, async (req, res) => {
-    res.render('newpost');
+    res.render('newpost', {
+        logged_in: req.session.logged_in
+    });
 })
 
 
