@@ -68,15 +68,24 @@ router.get('/dashboard', withAuth, async (req, res) => {
 router.get('/post/:id', withAuth, async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
-            include: [{ model: Comment }]
+            include: [
+                { 
+                    model: Comment 
+                },
+                {
+                    model: User,
+                    attributes: {exclude: ['password']}
+                }
+            ]
         });
 
         const post = postData.get({ plain: true });
 
-        res.render('post', {
+        res.render('pubpost', {
             post,
             logged_in: req.session.logged_in
         });
+        // res.json(post);
     }
     catch (err) {
         res.status(500).json(err);
@@ -88,7 +97,8 @@ router.get('/newpost', withAuth, async (req, res) => {
     res.render('newpost', {
         logged_in: req.session.logged_in
     });
-})
+});
+
 
 
 module.exports = router;
