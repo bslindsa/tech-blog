@@ -4,17 +4,20 @@
 
 <div>
     {{#if user.posts.length}}
-    <div class="d-flex mt-3 row flex-column-reverse">
+    <div class="d-flex mt-3 row flex-column-reverse dashboard">
         {{#each user.posts as |post|}}
-        <a href="/dashboard/{{post.id}}">
         <div class="card col-10 mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{post.title}}</h5>
-                <p>Posted on {{format_date date_created}}</p>
-                <p class="card-text">{{post.content}}</p>
+        <a href="/post/{{post.id}}">
+            <div class="text-white">
+                <div class="card-body">
+                    <h5 class="card-title">{{post.title}}</h5>
+                    <p>Posted on {{format_date date_created}}</p>
+                    <p class="card-text">{{post.content}}</p>
+                </div>
             </div>
-        </div>
         </a>
+        <button class="btn btn-primary cssbtn col-4 m-auto" id="edit-{{post.id}}" data-id="{{post.id}}" type="click">Edit</button>
+        </div>
         {{/each}}
     </div>
     {{/if}}
