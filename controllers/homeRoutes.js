@@ -46,8 +46,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
         const userData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['password'] },
             include: [{
-                model: Post,
-                include: { model: Comment }
+                model: Post
             }]
         });
 
@@ -64,19 +63,38 @@ router.get('/dashboard', withAuth, async (req, res) => {
     }
 });
 
+router.get('/dashboard/:id', withAuth, async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id);
+
+        const post = postData.get({ plain: true });
+
+        res.render('editpost', {
+            post,
+            logged_in: req.session.logged_in
+        });
+        // res.json(user);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 // View specific post
 router.get('/post/:id', withAuth, async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
             include: [
-                { 
+                {
                     model: Comment,
-                    include: {model:User,
-                    attributes: {exclude: ['password', 'email']}}
+                    include: {
+                        model: User,
+                        attributes: { exclude: ['password', 'email'] }
+                    }
                 },
                 {
                     model: User,
-                    attributes: {exclude: ['password']}
+                    attributes: { exclude: ['password'] }
                 }
             ]
         });
