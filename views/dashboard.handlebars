@@ -1,8 +1,12 @@
 <div>
+    <h1>{{user.name}}'s Dashboard</h1>
+</div>
+
+<div>
     {{#if user.posts.length}}
     <div class="d-flex mt-3 row flex-column-reverse">
         {{#each user.posts as |post|}}
-        <a href="/post/{{post.id}}">
+        <a href="/dashboard/{{post.id}}">
         <div class="card col-10 mb-3">
             <div class="card-body">
                 <h5 class="card-title">{{post.title}}</h5>

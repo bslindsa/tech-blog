@@ -5,10 +5,13 @@
     </div>
     <div class="form-group mb-3">
         <label for="post-content" class="col-sm-4 col-form-label custom-label">Text:</label>
-        <input class="form-input col-sm-6" type="text" id="post-content" value="{{post.content}}" autocomplete="off"/>
+        <textarea class="form-input col-sm-6" type="text" id="post-content" autocomplete="off">{{post.content}}</textarea>
     </div>
     <div class="form-group">
-        <button class="btn btn-primary cssbtn" id="update-post" data-id="{{post.id}}" type="submit">Save</button>
+        <button class="btn btn-primary cssbtn" id="update-post" data-id="{{post.id}}" type="click">Save</button>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary cssbtn" id="delete-post" data-id="{{post.id}}" type="click">Delete</button>
     </div>
 </form>
 
