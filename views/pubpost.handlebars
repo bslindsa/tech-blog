@@ -1,10 +1,10 @@
-<div class="card public-post">
+<div class="card public-post col-10">
     <div class="card-body">
         <h5 class="card-title">{{post.title}}</h5>
         <p>Posted by {{post.user.name}} on {{format_date post.date_created}}</p>
         <p class="card-text">{{post.content}}</p>
     </div>
-    <button id="comment">Comment</button>
+    <button id="comment" class="col-4 m-auto">Comment</button>
 </div>
 
 {{!-- Show only when 'comment' button is clicked --}}
@@ -12,7 +12,7 @@
     <form class="form comment-form">
         <div class="form-group mb-3">
             <label for="comment" class="col-sm-4 col-form-label custom-label">Comment:</label>
-            <input class="form-input col-sm-6" type="text" id="comment-text" />
+            <input class="form-input col-sm-6" type="text" id="comment-text" autocomplete="off"/>
         </div>
         <div class="form-group">
             <button class="btn btn-primary cssbtn" id="add-comment" data-id="{{post.id}}" type="submit">Add

@@ -1,9 +1,9 @@
-const id = document.querySelector('.cssbtn').getAttribute('data-id');
+const id = document.querySelector('#update-post').getAttribute('data-id');
 
 const postUpdateHandler = async (event) => {
     const title = document.querySelector('#post-title').value.trim();
     const content = document.querySelector('#post-content').value.trim();
-    
+
     const response = await fetch(`/api/post/${id}`, {
         method: 'PUT',
         body: JSON.stringify({ title, content }),

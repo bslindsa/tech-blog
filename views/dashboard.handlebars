@@ -1,14 +1,16 @@
 <div>
     {{#if user.posts.length}}
-    <div class="d-flex flex-column-reverse">
+    <div class="d-flex mt-3 row flex-column-reverse">
         {{#each user.posts as |post|}}
-        <div class="card">
+        <a href="/post/{{post.id}}">
+        <div class="card col-10 mb-3">
             <div class="card-body">
                 <h5 class="card-title">{{post.title}}</h5>
                 <p>Posted on {{format_date date_created}}</p>
                 <p class="card-text">{{post.content}}</p>
             </div>
         </div>
+        </a>
         {{/each}}
     </div>
     {{/if}}
