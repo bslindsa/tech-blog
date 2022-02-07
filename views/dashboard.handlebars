@@ -2,6 +2,8 @@
     <h1>{{user.name}}'s Dashboard</h1>
 </div>
 
+<button id="new-post" class="cssbtn">New Post</button>
+
 <div>
     {{#if user.posts.length}}
     <div class="d-flex mt-3 row flex-column-reverse dashboard">
@@ -23,8 +25,5 @@
     {{/if}}
 </div>
 
-
-
-<button id="new-post">New Post</button>
 
 <script src="./js/dashboard.js"></script>

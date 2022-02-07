@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/:id', async (req, res) => {
+router.post('/:id', withAuth, async (req, res) => {
     try {
         const commentData = await Comment.create({
             ...req.body,
@@ -26,7 +26,7 @@ router.post('/:id', async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
     try {
         const commentData = await Comment.update(req.body, {
             where: {

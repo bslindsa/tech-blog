@@ -1,22 +1,19 @@
-<div class="card public-post col-10">
+<div class="card public-post col-11">
     <div class="card-body">
         <h5 class="card-title">{{post.title}}</h5>
         <p>Posted by {{post.user.name}} on {{format_date post.date_created}}</p>
         <p class="card-text">{{post.content}}</p>
     </div>
-    <button id="comment" class="col-4 m-auto">Comment</button>
+    <button id="commentbtn" class="col-4 m-auto cssbtn">Comment</button>
 </div>
 
 {{!-- Show only when 'comment' button is clicked --}}
-<div>
-    <form class="form comment-form">
-        <div class="form-group mb-3">
-            <label for="comment" class="col-sm-4 col-form-label custom-label">Comment:</label>
-            <input class="form-input col-sm-6" type="text" id="comment-text" autocomplete="off"/>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-primary cssbtn" id="add-comment" data-id="{{post.id}}" type="submit">Add
-                Comment</button>
+<div id="comment" class="card mt-3 mb-3 col-10">
+    <form class="form comment-form col-12 m-auto mt-3">
+        <div class="form-group p-2">
+            <label for="comment" class="col-sm-4  custom-label">Comment:</label>
+            <input class="form-input col-sm-12 " type="text" id="comment-text" autocomplete="off" />
+            <button class="btn btn-primary cssbtn mt-1 m-auto justify-content-center" id="add-comment" data-id="{{post.id}}" type="submit">Submit</button>
         </div>
     </form>
 </div>
@@ -24,13 +21,13 @@
 
 <div>
     {{#if post.comments.length}}
-    <div class="comments">
+    <div class="comments mt-3">
         {{#each post.comments as |comment|}}
-        <div class="card post-comment">
+        <div class="card post-comment col-10 m-auto mb-2">
             <div class="card-body">
                 <h5 class="card-title">{{comment.content}}</h5>
                 <p>- {{comment.user.name}}, {{format_date comment.date_created}}</p>
-                <p class="card-text">{{post.content}}</p>
+                <p>{{post.content}}</p>
             </div>
         </div>
         {{/each}}

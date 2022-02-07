@@ -1,17 +1,20 @@
-<form class="form post-form">
+<form class="form post-form card col-11">
     <div class="form-group mb-3">
-        <label for="post-title" class="col-sm-4 col-form-label custom-label">Title:</label>
-        <input class="form-input col-sm-6" type="text" id="post-title" value="{{post.title}}" autocomplete="off"/>
+        <label for="post-title" class="ml-4 col-sm-2 col-form-label custom-label">Title:</label>
+        <input class="form-input col-sm-11 m-3" type="text" id="post-title" value="{{post.title}}" autocomplete="off" />
     </div>
     <div class="form-group mb-3">
-        <label for="post-content" class="col-sm-4 col-form-label custom-label">Text:</label>
-        <textarea class="form-input col-sm-6" type="text" id="post-content" autocomplete="off">{{post.content}}</textarea>
+        <label for="post-content" class="col-sm-2 col-form-label custom-label">Text:</label>
+        <textarea class="form-input col-sm-11 m-3" type="text" id="post-content"
+            autocomplete="off">{{post.content}}</textarea>
     </div>
-    <div class="form-group">
-        <button class="btn btn-primary cssbtn" id="update-post" data-id="{{post.id}}" type="click">Save</button>
-    </div>
-    <div class="form-group">
-        <button class="btn btn-primary cssbtn" id="delete-post" data-id="{{post.id}}" type="click">Delete</button>
+    <div class="row m-auto">
+        <div class="form-group">
+            <button class="btn btn-primary cssbtn" id="update-post" data-id="{{post.id}}" type="click">Save</button>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary cssbtn" id="delete-post" data-id="{{post.id}}" type="click">Delete</button>
+        </div>
     </div>
 </form>
 
