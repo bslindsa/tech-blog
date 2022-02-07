@@ -10,7 +10,7 @@ let inactivityTime = function () {
 
     function resetTimer() {
         clearTimeout(time);
-        time = setTimeout(logout, 5000)
+        time = setTimeout(logout, 3000000)
     };
 
     function logout() {
