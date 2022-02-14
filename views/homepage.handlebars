@@ -3,16 +3,19 @@
     <div class="posts mt-3 row d-flex flex-column-reverse">
         {{#each posts as |post|}}
         <a href="/post/{{post.id}}">
-        <div class="card public-post col-10 mb-3" id="post-{{post.id}}" data-id="{{post.id}}">
-            <div class="card-body">
-                <h5 class="card-title">{{post.title}}</h5>
-                <p>Posted by {{post.user.name}} on {{format_date date_created}}</p>
-                <p class="card-text">{{post.content}}</p>
+            <div class="card public-post col-10 mb-3" id="post-{{post.id}}" data-id="{{post.id}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{post.title}}</h5>
+                    <p>Posted by {{post.user.name}} on {{format_date date_created}}</p>
+                    <p class="card-text">{{post.content}}</p>
+                </div>
             </div>
-        </div>
         </a>
         {{/each}}
     </div>
+    {{else}}
+    <div class="posts mt-3 row d-flex flex-column-reverse">
+        <h2>No Posts Present</h2>
+    </div>
     {{/if}}
 </div>
-
