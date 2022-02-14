@@ -1,3 +1,5 @@
+let idle = false;
+
 const loginFormHandler = async (event) => {
     event.preventDefault();
 
