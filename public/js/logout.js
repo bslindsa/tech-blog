@@ -19,7 +19,7 @@ const logout = async () => {
   });
 
   if (response.ok) {
-    alert('Logged out due to inactivity')
+    alert('Logged out');
     document.location.replace('/login');
   } else {
     alert(response.statusText);
